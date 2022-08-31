@@ -5,14 +5,22 @@ class DishDetail extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            selectedDish: this.props.dish,
-            Comment: this.props.dish.comments
-        };
+        if (this.props.dish != undefined) {
+            this.state = {
+                selectedDish: this.props.dish,
+                Comment: this.props.dish.comments
+            };
+        }
     }
 
     renderDish(dish) {
-        if (dish != null) {
+        console.log(dish);
+        if (dish == null || dish == undefined) {
+            return (
+                <div></div>
+            );
+        }
+        else {
             return (
                 <div className="col-12 col-md-5 m-1">
                     <Card>
@@ -25,17 +33,12 @@ class DishDetail extends Component {
                 </div>
             );
         }
-        else {
-            return (
-                <div></div>
-            );
-        }
     }
 
     renderComments(comments) {
         if (comments != null) {
             const cmnts = comments.map((comment) => {
-                return(<li key={comment.id}>
+                return (<li key={comment.id}>
                     <p>{comment.comment}</p>
                     <p>-- <b>{comment.author}</b>,
                         &nbsp;
@@ -47,8 +50,8 @@ class DishDetail extends Component {
                     </p>
                 </li>)
             })
-            
-            return (        
+
+            return (
                 <div className="col-12 col-md-5 m-1">
                     <h4> Comments </h4>
                     <ul>
@@ -67,14 +70,21 @@ class DishDetail extends Component {
     }
 
     render() {
-        return (
-            <div className="container">
-                <div className="row">
-                    {this.renderDish(this.state.selectedDish)}
-                    {this.renderComments(this.state.Comment)}
+        if(this.state != null){
+            return (
+                <div className="container">
+                    <div className="row">
+                        {this.renderDish(this.state.selectedDish)}
+                        {this.renderComments(this.state.Comment)}
+                    </div>
                 </div>
-            </div>
-        )
+            )
+        }
+        else{
+            return(
+                <div></div>
+            )
+        }
     }
 }
 
