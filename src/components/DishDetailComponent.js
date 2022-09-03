@@ -2,19 +2,12 @@ import React, { Component } from "react";
 import { Card, CardBody, CardTitle, CardImg, CardImgOverlay, CardText } from "reactstrap";
 
 class DishDetail extends Component {
+
     constructor(props) {
         super(props);
-
-        if (this.props.dish != undefined) {
-            this.state = {
-                selectedDish: this.props.dish,
-                Comment: this.props.dish.comments
-            };
-        }
     }
 
     renderDish(dish) {
-        console.log(dish);
         if (dish == null || dish == undefined) {
             return (
                 <div></div>
@@ -58,11 +51,9 @@ class DishDetail extends Component {
                         {cmnts}
                     </ul>
                 </div>
-                //  className='list-unstyled'
             );
         }
         else {
-            console.log('in else');
             return (
                 <div></div>
             );
@@ -70,12 +61,12 @@ class DishDetail extends Component {
     }
 
     render() {
-        if(this.state != null){
+        if(this.props.dish != null){
             return (
                 <div className="container">
                     <div className="row">
-                        {this.renderDish(this.state.selectedDish)}
-                        {this.renderComments(this.state.Comment)}
+                        {this.renderDish(this.props.dish)}
+                        {this.renderComments(this.props.dish.Comment)}
                     </div>
                 </div>
             )
@@ -87,6 +78,5 @@ class DishDetail extends Component {
         }
     }
 }
-
 
 export default DishDetail;
