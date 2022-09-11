@@ -7,6 +7,7 @@ import Footer from './FooterComponent';
 import Header from './HeaderComponent';
 import { Routes, Route } from 'react-router-dom';
 import Home from './HomeComponent';
+import Contact from './ContactComponent';
 
 class Main extends Component {
 
@@ -38,7 +39,8 @@ class Main extends Component {
                 <Routes>
                     <Route path="/home" element={HomePage}></Route>
                     {/* <Menu dishes={this.state.dishes} onClk={(dishId) => this.onDishSelect(dishId)} /> */}
-                    <Route exact path="menu" element={<Menu dishes={this.state.dishes} render={() => ({})} />} />
+                    <Route exact path="/menu" element={<Menu dishes={this.state.dishes} render={() => ({})} />} />
+                    <Route exact path="/contactus" element={<Contact />} />
                     {/* <DishDetail dish={this.state.dishes.filter(dish => dish.id === this.state.selectedDish)[0]} /> */}
                     <Route path="/" to="/home" />
                 </Routes>
