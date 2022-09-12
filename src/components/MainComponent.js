@@ -1,6 +1,9 @@
 // import './App.css';
 import Menu from './MenuComponent';
 import { DISHES } from '../shared/dishes';
+import { COMMENTS } from '../shared/comments';
+import { PROMOTIONS } from '../shared/promotions';
+import { LEADERS } from '../shared/leaders';
 import { Component } from 'react';
 import DishDetail from './DishDetailComponent';
 import Footer from './FooterComponent';
@@ -16,7 +19,9 @@ class Main extends Component {
 
         this.state = {
             dishes: DISHES,
-            selectedDish: null
+            comments: COMMENTS,
+            leaders: LEADERS,
+            promotions: PROMOTIONS
         };
     }
 
