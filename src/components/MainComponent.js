@@ -31,18 +31,27 @@ class Main extends Component {
 
 
     render() {
-        const HomePage = () =>{
-            return(
-                <Home />
+        const HomePage = () => {
+            console.log('in home page');
+            return (
+                <Home
+                    dish={this.state.dishes.filter((dish) => dish.featured)[0]}
+                    promotion={this.state.promotions.filter((promo) => promo.featured)[0]}
+                    leader={this.state.leaders.filter((leader) => leader.featured)[0]}
+                />
             )
         }
 
         return (
-            
+
             <div>
                 <Header />
                 <Routes>
-                    <Route path="/home" element={HomePage}></Route>
+                    <Route path="/home" element={<Home
+                        dish={this.state.dishes.filter((dish) => dish.featured)[0]}
+                        promotion={this.state.promotions.filter((promo) => promo.featured)[0]}
+                        leader={this.state.leaders.filter((leader) => leader.featured)[0]}
+                    />}></Route>
                     {/* <Menu dishes={this.state.dishes} onClk={(dishId) => this.onDishSelect(dishId)} /> */}
                     <Route exact path="/menu" element={<Menu dishes={this.state.dishes} render={() => ({})} />} />
                     <Route exact path="/contactus" element={<Contact />} />
