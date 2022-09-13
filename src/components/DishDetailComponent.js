@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Card, CardBody, CardTitle, CardImg, CardImgOverlay, CardText } from "reactstrap";
+import { Link } from "react-router-dom";
+import { Card, CardBody, CardTitle, CardImg, CardImgOverlay, CardText, Breadcrumb, BreadcrumbItem } from "reactstrap";
 
 function RenderDish({ dish }) {
     if (dish == null || dish == undefined) {
@@ -9,14 +10,20 @@ function RenderDish({ dish }) {
     }
     else {
         return (
-            <div className="col-12 col-md-5 m-1">
-                <Card>
-                    <CardImg width="100%" src={dish.image} alt={dish.name} />
-                    <CardBody>
-                        <CardTitle><b>{dish.name}</b></CardTitle>
-                        <CardText>{dish.description}</CardText>
-                    </CardBody>
-                </Card>
+            <div className="row">
+                <Breadcrumb>
+                    <BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
+                    <BreadcrumbItem active>{dish.name}</BreadcrumbItem>
+                </Breadcrumb>
+                <div className="col-12 col-md-5 m-1">
+                    <Card>
+                        <CardImg width="100%" src={dish.image} alt={dish.name} />
+                        <CardBody>
+                            <CardTitle><b>{dish.name}</b></CardTitle>
+                            <CardText>{dish.description}</CardText>
+                        </CardBody>
+                    </Card>
+                </div>
             </div>
         );
     }
@@ -55,21 +62,17 @@ function RenderComments({ comments }) {
 }
 
 const DishDetail = (props) => {
-
-    console.log(props.dish);
-    
     if (props.dish) {
         return (
             <div className="container">
                 <div className="row">
-                    <RenderDish dish = {props.dish} />
-                    <RenderComments comments = {props.dish.comments} />
+                    <RenderDish dish={props.dish} />
+                    <RenderComments comments={props.comments} />
                 </div>
             </div>
         )
     }
     else {
-        console.log('in else');
         return (
             <div></div>
         )
