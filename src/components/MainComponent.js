@@ -11,6 +11,7 @@ import Header from './HeaderComponent';
 import { Routes, Route, useParams } from 'react-router-dom';
 import Home from './HomeComponent';
 import Contact from './ContactComponent';
+import About from './AboutComponent';
 
 class Main extends Component {
 
@@ -60,6 +61,7 @@ class Main extends Component {
                     <Route exact path="/contactus" element={<Contact />} />
                     {/* <DishDetail dish={this.state.dishes.filter(dish => dish.id === this.state.selectedDish)[0]} /> */}
                     <Route path="/menu/:dishId" element={<DishWithId />} />
+                    <Route path="/about" element={<About leaders={this.state.leaders}/>} />
                     <Route path="/" to="/home" />
                 </Routes>
                 <Footer />
