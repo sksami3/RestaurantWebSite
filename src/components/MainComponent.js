@@ -62,7 +62,7 @@ class Main extends Component {
                     {/* <DishDetail dish={this.state.dishes.filter(dish => dish.id === this.state.selectedDish)[0]} /> */}
                     <Route path="/menu/:dishId" element={<DishWithId />} />
                     <Route path="/about" element={<About leaders={this.state.leaders}/>} />
-                    <Route path="/" to="/home" />
+                    <Route path="/" element={<HomePage />} />
                 </Routes>
                 <Footer />
             </div>

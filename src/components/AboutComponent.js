@@ -4,13 +4,33 @@ import { Link } from 'react-router-dom';
 
 function About(props) {
 
+    const RenderLeaders = ({ leader }) => {
+        return (
+            <div key={leader.id} className="col-12 mt-5">
+                <Media left middle className="col-md-1">
+                    <Media
+                        object
+                        src=
+                        {leader.image}
+                        alt="leader photo"
+                    />
+                </Media>
+                <Media body className="ml-5 col-md-9">
+                    <Media heading><strong>{leader.name}</strong></Media>
+                    <Media heading>{leader.designation}</Media>
+                    {leader.description}
+                </Media>
+            </div>
+        );
+    }
+
     const leaders = props.leaders.map((leader) => {
         return (
-            <p>Leader {leader.name}</p>
+            <RenderLeaders leader={leader} />
         );
     });
 
-    return(
+    return (
         <div className="container">
             <div className="row">
                 <Breadcrumb>
@@ -20,7 +40,7 @@ function About(props) {
                 <div className="col-12">
                     <h3>About Us</h3>
                     <hr />
-                </div>                
+                </div>
             </div>
             <div className="row row-content">
                 <div className="col-12 col-md-6">
@@ -52,8 +72,8 @@ function About(props) {
                                 <p className="mb-0">You better cut the pizza in four pieces because
                                     I'm not hungry enough to eat six.</p>
                                 <footer className="blockquote-footer">Yogi Berra,
-                                <cite title="Source Title">The Wit and Wisdom of Yogi Berra,
-                                    P. Pepe, Diversion Books, 2014</cite>
+                                    <cite title="Source Title">The Wit and Wisdom of Yogi Berra,
+                                        P. Pepe, Diversion Books, 2014</cite>
                                 </footer>
                             </blockquote>
                         </CardBody>
