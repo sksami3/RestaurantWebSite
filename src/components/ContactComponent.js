@@ -91,8 +91,21 @@ class Contact extends Component {
                                 <Control.text model=".lastname" id="lastname" name="lastname"
                                     placeholder="Last Name"
                                     className="form-control"
+                                    validators={{
+                                        required, minLength: minLength(2), maxLength: maxLength(11)
+                                    }}
                                 />
                             </Col>
+                            <Errors
+                                className="text-danger"
+                                model=".lastname"
+                                show="touched"
+                                messages={{
+                                    required: 'Required',
+                                    minLength: 'Must be greater than 2 characters',
+                                    maxLength: 'Must be 11 characters or less'
+                                }}
+                            />
                         </Row>
                         <Row className="form-group">
                             <Label htmlFor="telnum" md={2}>Contact Tel.</Label>
@@ -100,8 +113,20 @@ class Contact extends Component {
                                 <Control.text model=".telnum" id="telnum" name="telnum"
                                     placeholder="Tel. Number"
                                     className="form-control"
+                                    validators={{
+                                        required, isNumber
+                                    }}
                                 />
                             </Col>
+                            <Errors
+                                className="text-danger"
+                                model=".telnum"
+                                show="touched"
+                                messages={{
+                                    required: 'Required',
+                                    isNumber: 'Must be numbers'
+                                }}
+                            />
                         </Row>
                         <Row className="form-group">
                             <Label htmlFor="email" md={2}>Email</Label>
