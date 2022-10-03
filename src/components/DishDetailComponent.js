@@ -15,7 +15,7 @@ function RenderDish({ dish }) {
                     <BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
                     <BreadcrumbItem active>{dish.name}</BreadcrumbItem>
                 </Breadcrumb>
-                <div className="col-12 col-md-5 m-1">
+                <div className="col-12">
                     <Card>
                         <CardImg width="100%" src={dish.image} alt={dish.name} />
                         <CardBody>
@@ -46,7 +46,7 @@ function RenderComments({ comments }) {
         })
 
         return (
-            <div className="col-12 col-md-5 m-1">
+            <div className="col-12">
                 <h4> Comments </h4>
                 <ul>
                     {cmnts}
@@ -66,8 +66,12 @@ const DishDetail = (props) => {
         return (
             <div className="container">
                 <div className="row">
-                    <RenderDish dish={props.dish} />
-                    <RenderComments comments={props.comments} />
+                    <div className="col-md-7">
+                        <RenderDish dish={props.dish} />
+                    </div>
+                    <div className="col-md-5">
+                        <RenderComments comments={props.comments} />
+                    </div>
                 </div>
             </div>
         )
