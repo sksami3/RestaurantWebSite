@@ -10,12 +10,13 @@ import Contact from './ContactComponent';
 import About from './AboutComponent';
 import { connect } from 'react-redux';
 import { useNavigate } from 'react-router';
+import { addComment } from '../redux/ActionCreator';
 
-export const withRouter = (Component) =>{
-    const Wrapper = (props) =>{
+export const withRouter = (Component) => {
+    const Wrapper = (props) => {
         const history = useNavigate();
-        return <Component history={history} {...props}/>
-    } 
+        return <Component history={history} {...props} />
+    }
     return Wrapper;
 }
 
@@ -25,8 +26,12 @@ const mapStateToProps = state => {
         comments: state.comments,
         promotions: state.promotions,
         leaders: state.leaders
-      }
+    }
 }
+
+const mapDispatchToProps = dispatch => ({
+    addComment: (dishId, rating, author, comment) => dispatch(addComment(dishId, rating, author, comment))
+});
 
 class Main extends Component {
 
@@ -48,7 +53,6 @@ class Main extends Component {
 
     render() {
         const HomePage = () => {
-            console.log('in home page');
             return (
                 <Home
                     dish={this.props.dishes.filter((dish) => dish.featured)[0]}
@@ -59,10 +63,11 @@ class Main extends Component {
         }
 
         const DishWithId = (match) => {
-            let {dishId} = useParams();
+            let { dishId } = useParams();
             return (
                 <DishDetail dish={this.props.dishes.filter((dish) => dish.id === parseInt(dishId, 10))[0]}
-                    comments={this.props.comments.filter((comment) => comment.dishId === parseInt(dishId, 10))} />
+                    comments={this.props.comments.filter((comment) => comment.dishId === parseInt(dishId, 10))}
+                    addComment={this.props.addComment} />
             );
         }
 
@@ -76,7 +81,7 @@ class Main extends Component {
                     <Route exact path="/contactus" element={<Contact />} />
                     {/* <DishDetail dish={this.props.dishes.filter(dish => dish.id === this.props.selectedDish)[0]} /> */}
                     <Route path="/menu/:dishId" element={<DishWithId />} />
-                    <Route path="/about" element={<About leaders={this.props.leaders}/>} />
+                    <Route path="/about" element={<About leaders={this.props.leaders} />} />
                     <Route path="/" element={<HomePage />} />
                 </Routes>
                 <Footer />
@@ -85,4 +90,4 @@ class Main extends Component {
     }
 }
 
-export default withRouter(connect(mapStateToProps)(Main));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));

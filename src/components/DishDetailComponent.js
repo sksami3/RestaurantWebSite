@@ -75,7 +75,7 @@ const DishDetail = (props) => {
                     </div>
                     <div className="col-md-5">
                         <RenderComments comments={props.comments} />
-                        <CommentForm />
+                        <CommentForm props = {props.addComment}/>
                     </div>
                 </div>
             </div>
@@ -88,7 +88,7 @@ const DishDetail = (props) => {
     }
 }
 
-const CommentForm = () => {
+const CommentForm = (addComment) => {
 
     const required = (val) => (val && val.length)
     const maxLength = (len) => (val) => (val && (val.length <= len))
@@ -96,10 +96,12 @@ const CommentForm = () => {
 
     function hadnleSubmit(values) {
         toggleModal();
-        alert('Submitted values: ' + JSON.stringify(values));
+        //alert('Submitted values: ' + JSON.stringify(values));
 
         // event.preventDefault();
         // console.log(values);
+        console.log(addComment);
+        addComment(0, values.rating, values.author, values.comment);
     }
 
     // isModalOpen: false
