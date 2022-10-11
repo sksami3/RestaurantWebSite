@@ -5,6 +5,7 @@ import {
     Navbar, NavbarBrand, Jumbotron, NavbarToggler, Collapse, Nav, NavItem, Modal, ModalHeader, ModalBody, FormGroup, Label, Input, Form, Col
 } from "reactstrap";
 import { Control, LocalForm, Errors } from 'react-redux-form';
+import { Loading } from './LoadingComponent';
 
 function RenderDish({ dish }) {
     if (dish == null || dish == undefined) {
@@ -66,7 +67,25 @@ function RenderComments({ comments }) {
 }
 
 const DishDetail = (props) => {
-    if (props.dish) {
+    if (props.isLoading) {
+        return(
+            <div className="container">
+                <div className="row">            
+                    <Loading />
+                </div>
+            </div>
+        );
+    }
+    else if (props.errMess) {
+        return(
+            <div className="container">
+                <div className="row">            
+                    <h4>{props.errMess}</h4>
+                </div>
+            </div>
+        );
+    }
+    else if (props.dish) {
         return (
             <div className="container">
                 <div className="row">
@@ -75,7 +94,7 @@ const DishDetail = (props) => {
                     </div>
                     <div className="col-md-5">
                         <RenderComments comments={props.comments} />
-                        <CommentForm props = {props.addComment}/>
+                        <CommentForm props={props.addComment} />
                     </div>
                 </div>
             </div>
